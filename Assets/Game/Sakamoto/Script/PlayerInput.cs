@@ -106,6 +106,8 @@ public class PlayerInput : MonoBehaviour
         Debug.Log("スキル開始");
         _anim.SetTrigger("Skill");
 
+        yield return new WaitForSeconds(2f);
+
         //スキルのクールタイムがどれくらいで終わるか表示する
         DOTween.To(() => 0f,
             x => _skillSprite.fillAmount = x,
