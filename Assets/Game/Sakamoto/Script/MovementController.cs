@@ -10,6 +10,9 @@ public class MovementController : MonoBehaviour
     [Header("Playerのスピード")]
     [SerializeField] float _speed;
 
+    [Tooltip("アイテムを持ったかどうか")]
+    bool _isItem;
+
     PlayerInput _playerInput;
 
     void Start()
@@ -25,5 +28,13 @@ public class MovementController : MonoBehaviour
   　 void FixedUpdate()
     {
         _rb.velocity = _playerInput.MoveInput.normalized * new Vector2(_speed, _speed);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Item")) 
+        {
+            _isItem = true;
+        } 
     }
 }
