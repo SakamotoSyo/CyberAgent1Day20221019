@@ -7,8 +7,6 @@ using UnityEngine.EventSystems;
 public class ResultSystem : MonoBehaviour
 {
     [SerializeField] FadeSystem _fadeSystem;
-    [SerializeField] float _resultTime = 2;
-
 
     public void ReStart()
     {

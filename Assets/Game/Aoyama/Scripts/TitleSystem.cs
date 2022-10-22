@@ -35,5 +35,6 @@ public class TitleSystem : MonoBehaviour
     public void HoldSceneName(string sceneName)
     {
         _sceneName = sceneName;
+        Debug.Log($"Scenename : {sceneName} ‚ð•Û‘¶‚µ‚Ü‚µ‚½");
     }
 }

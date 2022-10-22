@@ -484,7 +484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fadeImage: {fileID: 775154424}
-  _fadeTime: 3
+  _fadeTime: 2
 --- !u!4 &419964097
 Transform:
   m_ObjectHideFlags: 0

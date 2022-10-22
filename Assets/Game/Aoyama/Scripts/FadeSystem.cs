@@ -11,7 +11,7 @@ public class FadeSystem : MonoBehaviour
     public void StartFadeIn()//フェードイン関数 
     {
         if (_fadeImage) _fadeImage.color = Color.black;
-        _fadeImage.DOFade(endValue: 0f, duration: _fadeTime).OnComplete(() => _fadeImage.gameObject.SetActive(false));
+        _fadeImage.DOFade(endValue: 0f, duration: _fadeTime);
     }
 
 
