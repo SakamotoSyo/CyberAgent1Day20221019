@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 74fad9199ed0468448e243adfb43e142
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - GenEi M Gothic v2
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 32bb5b4fc3767a54e8f2047c8ba121ba, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
