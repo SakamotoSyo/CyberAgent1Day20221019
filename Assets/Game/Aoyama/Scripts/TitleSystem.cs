@@ -12,13 +12,13 @@ public class TitleSystem : MonoBehaviour
     [SerializeField] GameObject[] _startObjects;
     [SerializeField] GameObject[] _noStartObjects;
 
+    public static string _sceneName;
+
     void Awake()
     {
         _fadeSystem.StartFadeIn();
         _startObjects.ToList().ForEach(o => o.SetActive(true));
-        _noStartObjects.ToList().ForEach(o => o.SetActive(false));
-
-        
+        _noStartObjects.ToList().ForEach(o => o.SetActive(false));       
     }
 
     private void FixedUpdate()
@@ -30,5 +30,10 @@ public class TitleSystem : MonoBehaviour
                 _eventSystem.SetSelectedGameObject(_helpButton);
             }
         }
+    }
+
+    public void HoldSceneName(string sceneName)
+    {
+        _sceneName = sceneName;
     }
 }
