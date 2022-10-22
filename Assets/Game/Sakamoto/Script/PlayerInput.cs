@@ -7,24 +7,24 @@ using DG.Tweening;
 
 public class PlayerInput : MonoBehaviour
 {
-    [Header("ƒXƒLƒ‹‚ÌƒN[ƒ‹ƒ^ƒCƒ€")]
+    [Header("ï¿½Xï¿½Lï¿½ï¿½ï¿½ÌƒNï¿½[ï¿½ï¿½ï¿½^ï¿½Cï¿½ï¿½")]
     [SerializeField] float _actionWait;
-    [Header("ƒXƒLƒ‹Script")]
+    [Header("ï¿½Xï¿½Lï¿½ï¿½Script")]
     [SerializeField] SkillSystem _skillSystem;
     [Header("Animator")]
     [SerializeField] Animator _anim;
-    [Header("Player‚ÌSprite")]
+    [Header("Playerï¿½ï¿½Sprite")]
     [SerializeField] SpriteRenderer _playerSprite;
 
-    [Tooltip("Skill‚ÌSprite")]
+    [Tooltip("Skillï¿½ï¿½Sprite")]
     Image _skillSprite;
-    [Tooltip("“®‚­•ûŒü")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     Vector2 _movement;
-    [Tooltip("ÅŒã‚É“®‚¢‚½•ûŒü‚ğ•Û‘¶‚µ‚Ä‚¨‚­")]
+    [Tooltip("ï¿½ÅŒï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û‘ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½")]
     Vector2 _playerDirection;
-    [Tooltip("Œ»İSkill‚ªg‚¦‚é‚©")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½Skillï¿½ï¿½ï¿½gï¿½ï¿½ï¿½é‚©")]
     bool _isSkill = true;
-    [Tooltip("Input‚ğƒuƒƒbƒN‚·‚é‚©‚Ç‚¤‚©")]
+    [Tooltip("Inputï¿½ï¿½ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½é‚©ï¿½Ç‚ï¿½ï¿½ï¿½")]
     bool _inputBlock = false;
 
     Coroutine _actionCoroutine;
@@ -36,16 +36,16 @@ public class PlayerInput : MonoBehaviour
         _skillSprite = GameObject.Find("SkillGaugePrefab/SkillGauge").GetComponent<Image>();
         if (_skillSprite == null)
         {
-            Debug.LogError("SkillSprite‚ªNull‚Å‚·");
+            Debug.LogError("SkillSpriteï¿½ï¿½Nullï¿½Å‚ï¿½");
         }
     }
 
-    /// <summary>Œ»İƒXƒLƒ‹‚ğg‚¦‚é‚©‚Ç‚¤‚©•Ô‚·</summary>
+    /// <summary>ï¿½ï¿½ï¿½İƒXï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½é‚©ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½</summary>
     public bool Skill
     {
         get { return _isSkill && !_inputBlock; }
     }
-    /// <summary>Œ»İ‚Ì•ûŒü“ü—Í‚ğ•Ô‚·</summary>
+    /// <summary>ï¿½ï¿½ï¿½İ‚Ì•ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½Ô‚ï¿½</summary>
     public Vector2 MoveInput
     {
         get
@@ -70,7 +70,7 @@ public class PlayerInput : MonoBehaviour
         {
             _anim.SetBool("Walk", true);
             _playerDirection = _movement;
-            //Player‚ÌŒü‚«‚ğ”½“]‚³‚¹‚é
+            //Playerï¿½ÌŒï¿½ï¿½ï¿½ï¿½ğ”½“]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (_playerDirection.x < 0)
             {
                 _playerSprite.flipX = false;
@@ -92,36 +92,39 @@ public class PlayerInput : MonoBehaviour
                 StopCoroutine(_actionCoroutine);
             }
 
+
+
             _actionCoroutine = StartCoroutine(ActionWait());
         }
     }
 
     /// <summary>
-    /// Ÿ‚ÉƒXƒLƒ‹‚ªg‚¦‚é‚½‚ß‚ÌƒN[ƒ‹ƒ^ƒCƒ€
+    /// ï¿½ï¿½ï¿½ÉƒXï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½é‚½ï¿½ß‚ÌƒNï¿½[ï¿½ï¿½ï¿½^ï¿½Cï¿½ï¿½
     /// </summary>
     /// <returns></returns>
     IEnumerator ActionWait()
     {
         _isSkill = false;
-        Debug.Log("ƒXƒLƒ‹ŠJn");
+        Debug.Log("ï¿½Xï¿½Lï¿½ï¿½ï¿½Jï¿½n");
         _anim.SetTrigger("Skill");
 
-        //ƒXƒLƒ‹‚ÌƒN[ƒ‹ƒ^ƒCƒ€‚ª‚Ç‚ê‚­‚ç‚¢‚ÅI‚í‚é‚©•\¦‚·‚é
+        
+
+        yield return _actionWaitForSeconds;
+        _skillSystem.LightOff(_actionWait);
+        //ï¿½Xï¿½Lï¿½ï¿½ï¿½ÌƒNï¿½[ï¿½ï¿½ï¿½^ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Ç‚ê‚­ï¿½ç‚¢ï¿½ÅIï¿½ï¿½é‚©ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         DOTween.To(() => 0f,
             x => _skillSprite.fillAmount = x,
             1f, _actionWait);
 
-        _skillSystem.LightOff(_actionWait);
-        yield return _actionWaitForSeconds;
-
-        Debug.Log("ƒXƒLƒ‹I—¹");
+        Debug.Log("ï¿½Xï¿½Lï¿½ï¿½ï¿½Iï¿½ï¿½");
         _isSkill = true;
     }
 
-    /// <summary>Input‚ÉŠÖ‚·‚é“ü—Í‚ğó‚¯•t‚¯‚é‚©‚Ç‚¤‚©•ÏX‚·‚é</summary>
+    /// <summary>Inputï¿½ÉŠÖ‚ï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ó‚¯•tï¿½ï¿½ï¿½é‚©ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ÏXï¿½ï¿½ï¿½ï¿½</summary>
     public void InputBlock()
     {
-        Debug.Log("ŒÄ‚Î‚ê‚½");
+        Debug.Log("ï¿½Ä‚Î‚ê‚½");
         _inputBlock = !_inputBlock;
     }
 }
