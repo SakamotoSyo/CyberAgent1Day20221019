@@ -11,6 +11,7 @@ public class FadeSystem : MonoBehaviour
     private void Awake()
     {
         _fadeImage.color = Color.black;
+        StartFadeIn();
     }
 
 

@@ -10,6 +10,11 @@ public class SkillSystem : MonoBehaviour
     /// </summary>
     GameObject[] _lights;
 
+    /// <summary>
+    /// ライトがついているかを表す変数
+    /// </summary>
+    public static bool _isLight;
+
 
     /// <summary>
     /// スキルを実行するメソッド
@@ -21,17 +26,21 @@ public class SkillSystem : MonoBehaviour
         {
             _lights = GameObject.FindGameObjectsWithTag("Light");
         }
-
+       
         SkillInterval(time);
     }
 
 
     IEnumerator SkillInterval(float time)
     {
+        _isLight = false;
         _lights.ToList().ForEach(l => l.SetActive(false));
         Debug.Log("スキル発動");
+
         yield return new WaitForSeconds(time);
+
         Debug.Log("スキル終了");
         _lights.ToList().ForEach(l => l.SetActive(true));
+        _isLight = true;
     }
 }

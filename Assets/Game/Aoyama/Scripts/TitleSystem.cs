@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class TitleSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] FadeSystem _fadeSystem;
+    [SerializeField] GameObject[] _startObjects;
+    [SerializeField] GameObject[] _noStartObjects;
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        
+        _startObjects.ToList().ForEach(o => o.SetActive(true));
+        _noStartObjects.ToList().ForEach(o => o.SetActive(false));
     }
 }

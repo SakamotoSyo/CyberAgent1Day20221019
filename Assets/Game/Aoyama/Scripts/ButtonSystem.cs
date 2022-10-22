@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class ButtonSystem : MonoBehaviour
 {
@@ -8,6 +10,6 @@ public class ButtonSystem : MonoBehaviour
 
     void Start()
     {
-        
+        //GetComponent<Image>().DOFade
     }
 }
