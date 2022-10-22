@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[ExecuteAlways]
+
+    [ExecuteAlways]
 public class NavMeshBuilder2D : MonoBehaviour
 {
     public enum UpdateMethod
@@ -98,3 +99,4 @@ public class NavMeshBuilder2D : MonoBehaviour
         Gizmos.DrawWireCube(data.sourceBounds.center, data.sourceBounds.size);
     }
 }
+
