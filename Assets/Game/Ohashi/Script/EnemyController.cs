@@ -24,10 +24,10 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(_count);
+        // Debug.Log(_count);
 
-        Debug.Log("Shadow:" + _playerMove.Shadow);
-        Debug.Log("SkillLigth:" + SkillSystem._isLight);
+        // Debug.Log("Shadow:" + _playerMove.Shadow);
+        // Debug.Log("SkillLigth:" + SkillSystem._isLight);
 
         //����̃��[�v
         if (_targets.Length <= _count)
@@ -47,7 +47,7 @@ public class EnemyController : MonoBehaviour
             {
                 //���񂳂���
                 _nav.destination = _targets[_count].position;
-                Debug.Log(_count);
+                // Debug.Log(_count);
             }
         }
         //���C�g���S���������Ƃ�
