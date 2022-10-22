@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovementController : MonoBehaviour
 {
+    public bool Shadow = false;
+
     [Header("Rigidbodyコンポーネント")]
     [SerializeField]Rigidbody2D _rb;
     [Header("Playerのスピード")]
@@ -35,6 +37,19 @@ public class MovementController : MonoBehaviour
         if (collision.CompareTag("Item")) 
         {
             _isItem = true;
-        } 
+        }
+
+        if (collision.CompareTag("Shadow")) 
+        {
+            Shadow = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Shadow")) 
+        {
+            Shadow = false;
+        }
     }
 }
