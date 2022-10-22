@@ -6,41 +6,48 @@ using UnityEngine;
 public class SkillSystem : MonoBehaviour
 {
     /// <summary>
-    /// ƒXƒe[ƒW“à‚Ì–¾‚©‚è‚ğæ“¾‚·‚é—p‚Ì•Ï”
+    /// ï¿½Xï¿½eï¿½[ï¿½Wï¿½ï¿½ï¿½Ì–ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½pï¿½Ì•Ïï¿½
     /// </summary>
     GameObject[] _lights;
 
     /// <summary>
-    /// ƒ‰ƒCƒg‚ª‚Â‚¢‚Ä‚¢‚é‚©‚ğ•\‚·•Ï”
+    /// ï¿½ï¿½ï¿½Cï¿½gï¿½ï¿½ï¿½Â‚ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½ï¿½\ï¿½ï¿½ï¿½Ïï¿½
     /// </summary>
-    public static bool _isLight;
+    public static bool _isLight = true;
 
 
     /// <summary>
-    /// ƒXƒLƒ‹‚ğÀs‚·‚éƒƒ\ƒbƒh
+    /// ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½éƒï¿½\ï¿½bï¿½h
     /// </summary>
-    /// <param name="time">Œõ‚ªÁ‚¦‚Ä‚¢‚éŠÔ</param>
+    /// <param name="time">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éï¿½ï¿½</param>
     public void LightOff(float time)
     {
+    
         if (_lights == null)
         {
+            Debug.Log("light delete");
             _lights = GameObject.FindGameObjectsWithTag("Light");
+            Debug.Log(_lights);
         }
        
-        SkillInterval(time);
+        StartCoroutine(SkillInterval(time));
     }
 
 
     IEnumerator SkillInterval(float time)
     {
+        Debug.Log("skill");
+
         _isLight = false;
-        _lights.ToList().ForEach(l => l.SetActive(false));
-        Debug.Log("ƒXƒLƒ‹”­“®");
+        _lights.ToList().ForEach(l => l.GetComponent<UnityEngine.Rendering.Universal.Light2D>().intensity = 0.1f);
+        Debug.Log("ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+
+        Debug.Log("skill");
 
         yield return new WaitForSeconds(time);
 
-        Debug.Log("ƒXƒLƒ‹I—¹");
-        _lights.ToList().ForEach(l => l.SetActive(true));
+        Debug.Log("ï¿½Xï¿½Lï¿½ï¿½ï¿½Iï¿½ï¿½");
+        _lights.ToList().ForEach(l => l.GetComponent<UnityEngine.Rendering.Universal.Light2D>().intensity = 1f);
         _isLight = true;
     }
 }

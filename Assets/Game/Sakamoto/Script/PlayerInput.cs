@@ -108,14 +108,19 @@ public class PlayerInput : MonoBehaviour
         Debug.Log("�X�L���J�n");
         _anim.SetTrigger("Skill");
 
+
         
 
-        yield return _actionWaitForSeconds;
-        _skillSystem.LightOff(_actionWait);
+        // yield return _actionWaitForSeconds;
         //�X�L���̃N�[���^�C�����ǂꂭ�炢�ŏI��邩�\������
+
+        yield return new WaitForSeconds(2f);
+
+
         DOTween.To(() => 0f,
             x => _skillSprite.fillAmount = x,
             1f, _actionWait);
+        _skillSystem.LightOff(_actionWait);
 
         Debug.Log("�X�L���I��");
         _isSkill = true;

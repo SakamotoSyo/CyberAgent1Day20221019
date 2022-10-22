@@ -6,47 +6,54 @@ using Yasuda;
 public class EnemyController : MonoBehaviour
 {
     
-    [SerializeField] Transform _paler;
+    [SerializeField] GameObject _paler;
     [SerializeField] Transform[] _targets;
     [SerializeField] bool isSuccess = false;
     NavMeshAgent2D _nav;
     FadeSystem _fade;
-    MovementController _playerMove;
-    [Tooltip("„‰ñæ‚Ì”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX")]int _count = 0;
+    [SerializeField]MovementController _playerMove;
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½Ì”zï¿½ï¿½ÌƒCï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½X")]int _count = 0;
 
     void Start()
     {
         _nav = GetComponent<NavMeshAgent2D>();
         _fade = FindObjectOfType<FadeSystem>().GetComponent<FadeSystem>();
-        _playerMove = FindObjectOfType<MovementController>().GetComponent<MovementController>();
+        // _playerMove = FindObjectOfType<MovementController>().GetComponent<MovementController>();
+        // _playerMove = this.gameObject.GetComponent<MovementController>();
     }
 
     void Update()
     {
-        //„‰ñ‚Ìƒ‹[ƒv
+        Debug.Log(_count);
+
+        Debug.Log("Shadow:" + _playerMove.Shadow);
+        Debug.Log("SkillLigth:" + SkillSystem._isLight);
+
+        //ï¿½ï¿½ï¿½ï¿½Ìƒï¿½ï¿½[ï¿½v
         if (_targets.Length <= _count)
         {
             _count = 0;
         }
-        if (!SkillSystem._isLight)
+        if (SkillSystem._isLight)
         {
-            //ƒvƒŒƒCƒ„[‚ª‰e‚É‚¢‚È‚¢‚Æ‚«
-            if (_playerMove.Shadow || isSuccess)
+            //ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½eï¿½É‚ï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½
+            if (!_playerMove.Shadow)
             {
-                //ƒvƒŒƒCƒ„[‚ğ’Ç‚¢‚©‚¯‚é
-                _nav.destination = _paler.position;
+                //ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                _nav.destination = _paler.transform.position;
             }
-            //ƒvƒŒƒCƒ„[‚ª‰e‚É‚¢‚é‚Æ‚«
+            //ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½eï¿½É‚ï¿½ï¿½ï¿½Æ‚ï¿½
             else
             {
-                //„‰ñ‚³‚¹‚é
+                //ï¿½ï¿½ï¿½ñ‚³‚ï¿½ï¿½ï¿½
                 _nav.destination = _targets[_count].position;
+                Debug.Log(_count);
             }
         }
-        //ƒ‰ƒCƒg‚ª‘S•”Á‚¦‚½‚Æ‚«
+        //ï¿½ï¿½ï¿½Cï¿½gï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½
         else
         {
-            //“®‚©‚È‚¢
+            //ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
         }
     }
     void OnTriggerEnter2D(Collider2D collision)
@@ -57,7 +64,7 @@ public class EnemyController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Target")
         {
-            //„‰ñæ‚ğ•Ï‚¦‚é
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï‚ï¿½ï¿½ï¿½
             _count += 1;
         }
     }
