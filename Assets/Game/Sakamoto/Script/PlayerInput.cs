@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -11,8 +13,11 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] SkillSystem _skillSystem;
     [Header("Animator")]
     [SerializeField] Animator _anim;
-    [Header("Sprite")]
-    [SerializeField] SpriteRenderer _spriteRenderer;
+    [Header("PlayerのSprite")]
+    [SerializeField] SpriteRenderer _playerSprite;
+
+    [Tooltip("SkillのSprite")]
+    Image _skillSprite;
     [Tooltip("動く方向")]
     Vector2 _movement;
     [Tooltip("最後に動いた方向を保存しておく")]
@@ -28,6 +33,11 @@ public class PlayerInput : MonoBehaviour
     void Awake()
     {
         _actionWaitForSeconds = new WaitForSeconds(_actionWait);
+        _skillSprite = GameObject.Find("SkillGaugePrefab/SkillGauge").GetComponent<Image>();
+        if (_skillSprite == null)
+        {
+            Debug.LogError("SkillSpriteがNullです");
+        }
     }
 
     /// <summary>現在スキルを使えるかどうか返す</summary>
@@ -36,25 +46,26 @@ public class PlayerInput : MonoBehaviour
         get { return _isSkill && !_inputBlock; }
     }
     /// <summary>現在の方向入力を返す</summary>
-    public Vector2 MoveInput 
+    public Vector2 MoveInput
     {
-        get 
+        get
         {
-            if (_inputBlock) 
+            if (_inputBlock)
             {
                 return Vector2.zero;
             }
             return _movement;
         }
-    } 
+    }
     void Start()
     {
-        
+
     }
 
     void Update()
     {
         _movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
         if (_movement.x != 0 || _movement.y != 0)
         {
             _anim.SetBool("Walk", true);
@@ -62,21 +73,21 @@ public class PlayerInput : MonoBehaviour
             //Playerの向きを反転させる
             if (_playerDirection.x < 0)
             {
-                _spriteRenderer.flipX = false;
+                _playerSprite.flipX = false;
             }
-            else if(_playerDirection.x > 0)
+            else if (_playerDirection.x > 0)
             {
-                _spriteRenderer.flipX = true;
+                _playerSprite.flipX = true;
             }
         }
-        else 
+        else
         {
             _anim.SetBool("Walk", false);
         }
 
-        if (Input.GetButtonDown("Submit") && _isSkill) 
+        if (Input.GetButtonDown("Submit") && _isSkill)
         {
-            if (_actionCoroutine != null) 
+            if (_actionCoroutine != null)
             {
                 StopCoroutine(_actionCoroutine);
             }
@@ -85,13 +96,22 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    IEnumerator ActionWait() 
+    /// <summary>
+    /// 次にスキルが使えるためのクールタイム
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator ActionWait()
     {
         _isSkill = false;
         Debug.Log("スキル開始");
         _anim.SetTrigger("Skill");
 
-       // _skillSystem.LightOff(_actionWait);
+        //スキルのクールタイムがどれくらいで終わるか表示する
+        DOTween.To(() => 0f,
+            x => _skillSprite.fillAmount = x,
+            1f, _actionWait);
+
+        _skillSystem.LightOff(_actionWait);
         yield return _actionWaitForSeconds;
 
         Debug.Log("スキル終了");
@@ -99,7 +119,7 @@ public class PlayerInput : MonoBehaviour
     }
 
     /// <summary>Inputに関する入力を受け付けるかどうか変更する</summary>
-    public void InputBlock() 
+    public void InputBlock()
     {
         Debug.Log("呼ばれた");
         _inputBlock = !_inputBlock;
