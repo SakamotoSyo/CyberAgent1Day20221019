@@ -7,24 +7,24 @@ using DG.Tweening;
 
 public class PlayerInput : MonoBehaviour
 {
-    [Header("?X?L????N?[???^?C??")]
+    [Header("スキルのクールタイム")]
     [SerializeField] float _actionWait;
-    [Header("?X?L??Script")]
+    [Header("スキルScript")]
     [SerializeField] SkillSystem _skillSystem;
     [Header("Animator")]
     [SerializeField] Animator _anim;
-    [Header("Player??Sprite")]
+    [Header("PlayerのSprite")]
     [SerializeField] SpriteRenderer _playerSprite;
 
-    [Tooltip("Skill??Sprite")]
+    [Tooltip("SkillのSprite")]
     Image _skillSprite;
-    [Tooltip("????????")]
+    [Tooltip("動く方向")]
     Vector2 _movement;
-    [Tooltip("????????????????????????")]
+    [Tooltip("最後に動いた方向を保存しておく")]
     Vector2 _playerDirection;
-    [Tooltip("????Skill???g????")]
+    [Tooltip("現在Skillが使えるか")]
     bool _isSkill = true;
-    [Tooltip("Input???u???b?N?????????")]
+    [Tooltip("Inputをブロックするかどうか")]
     bool _inputBlock = false;
 
     Coroutine _actionCoroutine;
@@ -33,19 +33,19 @@ public class PlayerInput : MonoBehaviour
     void Awake()
     {
         _actionWaitForSeconds = new WaitForSeconds(_actionWait);
-        // _skillSprite = GameObject.Find("SkillGaugePrefab/SkillGauge").GetComponent<Image>();
+        _skillSprite = GameObject.Find("SkillGaugePrefab/SkillGauge").GetComponent<Image>();
         if (_skillSprite == null)
         {
-            Debug.LogError("SkillSprite??Null???");
+            Debug.LogError("SkillSpriteがNullです");
         }
     }
 
-    /// <summary>????X?L?????g????????????</summary>
+    /// <summary>現在スキルを使えるかどうか返す</summary>
     public bool Skill
     {
         get { return _isSkill && !_inputBlock; }
     }
-    /// <summary>???????????????</summary>
+    /// <summary>現在の方向入力を返す</summary>
     public Vector2 MoveInput
     {
         get
@@ -70,7 +70,7 @@ public class PlayerInput : MonoBehaviour
         {
             _anim.SetBool("Walk", true);
             _playerDirection = _movement;
-            //Player???????]??????
+            //Playerの向きを反転させる
             if (_playerDirection.x < 0)
             {
                 _playerSprite.flipX = false;
@@ -97,16 +97,16 @@ public class PlayerInput : MonoBehaviour
     }
 
     /// <summary>
-    /// ????X?L?????g???????N?[???^?C??
+    /// 次にスキルが使えるためのクールタイム
     /// </summary>
     /// <returns></returns>
     IEnumerator ActionWait()
     {
         _isSkill = false;
-        Debug.Log("?X?L???J?n");
+        Debug.Log("スキル開始");
         _anim.SetTrigger("Skill");
 
-        //?X?L????N?[???^?C???????????I????\??????
+        //スキルのクールタイムがどれくらいで終わるか表示する
         DOTween.To(() => 0f,
             x => _skillSprite.fillAmount = x,
             1f, _actionWait);
@@ -114,14 +114,14 @@ public class PlayerInput : MonoBehaviour
         _skillSystem.LightOff(_actionWait);
         yield return _actionWaitForSeconds;
 
-        Debug.Log("?X?L???I??");
+        Debug.Log("スキル終了");
         _isSkill = true;
     }
 
-    /// <summary>Input????????????t???????????X????</summary>
+    /// <summary>Inputに関する入力を受け付けるかどうか変更する</summary>
     public void InputBlock()
     {
-        Debug.Log("????");
+        Debug.Log("呼ばれた");
         _inputBlock = !_inputBlock;
     }
 }
