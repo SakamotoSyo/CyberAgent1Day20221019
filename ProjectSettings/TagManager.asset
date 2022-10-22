@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Light
   - Shadow
+  - Target
+  - Item
+  - Start
+  - Enemy
   layers:
   - Default
   - TransparentFX

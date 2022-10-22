@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField]MovementController _playerMove;
     [Tooltip("�����̔z��̃C���f�b�N�X")]int _count = 0;
 
+    public GameObject hatena;
+
     void Start()
     {
         _nav = GetComponent<NavMeshAgent2D>();
@@ -24,6 +26,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        bool hatenaflg = false;
         // Debug.Log(_count);
 
         // Debug.Log("Shadow:" + _playerMove.Shadow);
@@ -53,8 +56,11 @@ public class EnemyController : MonoBehaviour
         //���C�g���S���������Ƃ�
         else
         {
+            hatenaflg = true;
             //�����Ȃ�
         }
+
+        hatena.SetActive(hatenaflg);
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
