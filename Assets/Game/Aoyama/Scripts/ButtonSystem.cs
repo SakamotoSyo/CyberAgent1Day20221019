@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class ButtonSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] float _moveTime = 0.1f;
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
         
     }
