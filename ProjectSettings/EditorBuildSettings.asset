@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Game/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
     path: Assets/Game/Aoyama/Scenes/Title.unity
     guid: 4cdf8e9ba6fc09144b14ab2d04f1cbfd
+  - enabled: 1
+    path: Assets/Game/Aoyama/Scenes/Success.unity
+    guid: dc338d95b09383943a4687bba626ab20
+  - enabled: 1
+    path: Assets/Game/Aoyama/Scenes/Failed.unity
+    guid: 65b9e539b68d7cd46bd9a5c68953cf7a
   m_configObjects: {}

@@ -8,15 +8,9 @@ public class FadeSystem : MonoBehaviour
     [SerializeField, Tooltip("フェードにかける時間")] float _fadeTime = 3f;
 
 
-    private void Awake()
-    {
-        _fadeImage.color = Color.black;
-        StartFadeIn();
-    }
-
-
     public void StartFadeIn()//フェードイン関数 
     {
+        if (_fadeImage) _fadeImage.color = Color.black;
         _fadeImage.DOFade(endValue: 0f, duration: _fadeTime).OnComplete(() => _fadeImage.gameObject.SetActive(false));
     }
 
