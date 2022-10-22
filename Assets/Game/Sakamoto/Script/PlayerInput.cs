@@ -30,6 +30,10 @@ public class PlayerInput : MonoBehaviour
     Coroutine _actionCoroutine;
     WaitForSeconds _actionWaitForSeconds;
 
+    public Material mat1;
+    public Material mat2;
+    public FadeSystem fs;
+
     void Awake()
     {
         _actionWaitForSeconds = new WaitForSeconds(_actionWait);
@@ -109,12 +113,13 @@ public class PlayerInput : MonoBehaviour
         _anim.SetTrigger("Skill");
 
 
-        
+        // マテリアル切り替え
+        _playerSprite.material = mat2;
 
         // yield return _actionWaitForSeconds;
         //�X�L���̃N�[���^�C�����ǂꂭ�炢�ŏI��邩�\������
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
 
 
         DOTween.To(() => 0f,
@@ -124,6 +129,11 @@ public class PlayerInput : MonoBehaviour
 
         Debug.Log("�X�L���I��");
         _isSkill = true;
+
+        yield return new WaitForSeconds(2f);
+
+        // マテリアル切り替え
+        _playerSprite.material = mat1;
     }
 
     /// <summary>Input�Ɋւ�����͂��󂯕t���邩�ǂ����ύX����</summary>
@@ -131,5 +141,25 @@ public class PlayerInput : MonoBehaviour
     {
         Debug.Log("�Ă΂ꂽ");
         _inputBlock = !_inputBlock;
+    }
+
+    private bool clearflg = false;
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Item")
+        {
+            
+            collision.gameObject.transform.parent = this.gameObject.transform;
+            clearflg = true;
+            Debug.Log("アイテム");
+        }
+        if(collision.gameObject.tag == "Start")
+        {
+            if(clearflg){
+                Debug.Log("クリア");
+                fs.StartFadeOut("Success");
+            }
+        }
     }
 }
