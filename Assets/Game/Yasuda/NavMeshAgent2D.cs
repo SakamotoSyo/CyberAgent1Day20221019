@@ -8,6 +8,7 @@ namespace Yasuda
         [Header("Steering")]
         public float speed = 1.0f;
         public float stoppingDistance = 0;
+        public bool _test = false;
 
         [HideInInspector]//常にUnityエディタから非表示
         private Vector2 trace_area=Vector2.zero;
@@ -35,7 +36,7 @@ namespace Yasuda
 
             // NavMesh に応じて経路を求める
             NavMeshPath path = new NavMeshPath();
-            NavMesh.CalculatePath(current, target, NavMesh.AllAreas, path);
+            _test = NavMesh.CalculatePath(current, target, NavMesh.AllAreas, path);
 
             Vector2 corner = path.corners[0];
 
